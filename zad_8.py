@@ -1,8 +1,16 @@
 import requests
 import argparse
 
+
 class Brewery:
-    def __init__(self, id: str, name: str, brewery_type: str, city: str, state: str, website_url: str):
+    def __init__(
+            self,
+            id: str,
+            name: str,
+            brewery_type: str,
+            city: str, state: str,
+            website_url: str
+    ):
         self.id = id
         self.name = name
         self.brewery_type = brewery_type
@@ -11,7 +19,9 @@ class Brewery:
         self.website_url = website_url
 
     def __str__(self):
-        return f"Name: {self.name}, City: {self.city}, Type: {self.brewery_type}, Site: {self.website_url}"
+        return (f"Name: {self.name}, City: {self.city}, "
+                f"Type: {self.brewery_type}, Site: {self.website_url}")
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--city', type=str)
@@ -21,7 +31,7 @@ url = "https://api.openbrewerydb.org/v1/breweries?per_page=20"
 
 if args.city:
     city_param = args.city.replace(" ", "_")
-    url = f"https://api.openbrewerydb.org/v1/breweries?by_city={city_param}&per_page=20"
+    url = f"https://api.openbrewerydb.org/v1/breweries?by_city={city_param}&per_page=20"  # noqa: E501
 
 response = requests.get(url)
 data = response.json()
