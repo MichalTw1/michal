@@ -2,7 +2,9 @@ import csv
 import os
 from fastapi import FastAPI
 
+
 app = FastAPI()
+
 
 class Movie:
     def __init__(self, movie_id, title, genres):
@@ -10,11 +12,13 @@ class Movie:
         self.title = title
         self.genres = genres
 
+
 class Link:
     def __init__(self, movie_id, imdb_id, tmdb_id):
         self.movie_id = movie_id
         self.imdb_id = imdb_id
         self.tmdb_id = tmdb_id
+
 
 class Rating:
     def __init__(self, user_id, movie_id, rating, timestamp):
@@ -23,12 +27,14 @@ class Rating:
         self.rating = rating
         self.timestamp = timestamp
 
+
 class Tag:
     def __init__(self, user_id, movie_id, tag, timestamp):
         self.user_id = user_id
         self.movie_id = movie_id
         self.tag = tag
         self.timestamp = timestamp
+
 
 @app.get("/movies")
 def get_movies():
@@ -51,6 +57,7 @@ def get_movies():
 
     return movies_list
 
+
 @app.get("/links")
 def get_links():
     links_list = []
@@ -71,6 +78,7 @@ def get_links():
             links_list.append(new_link.__dict__)
 
     return links_list
+
 
 @app.get("/ratings")
 def get_ratings(limit: int = 100):
