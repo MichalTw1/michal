@@ -4,7 +4,6 @@ import uuid
 import os
 import requests
 from fastapi import FastAPI, UploadFile, File, Query, HTTPException
-from typing import Optional
 
 app = FastAPI(title="Person Detection API")
 
