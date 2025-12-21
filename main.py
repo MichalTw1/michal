@@ -91,3 +91,41 @@ def get_ratings(limit: int = 100):
 
     with open(file_path, mode='r', encoding='utf-8') as file:
         csv_reader = csv.DictReader(file)
+
+        counter = 0
+        for row in csv_reader:
+            if counter >= limit:
+                break
+
+            new_rating = Rating(
+                user_id=row['userId'],
+                movie_id=row['movieId'],
+                rating=row['rating'],
+                timestamp=row['timestamp']
+            )
+            ratings_list.append(new_rating.__dict__)
+            counter += 1
+
+    return ratings_list
+
+@app.get("/tags")
+def get_tags():
+    tags_list = []
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "database", "tags.csv")
+
+    if not os.path.exists(file_path):
+        return {"error": f"File not found: {file_path}"}
+
+    with open(file_path, mode='r', encoding='utf-8') as file:
+        csv_reader = csv.DictReader(file)
+        for row in csv_reader:
+            new_tag = Tag(
+                user_id=row['userId'],
+                movie_id=row['movieId'],
+                tag=row['tag'],
+                timestamp=row['timestamp']
+            )
+            tags_list.append(new_tag.__dict__)
+
+    return tags_list
