@@ -57,7 +57,6 @@ def load_ratings(session):
 
 
 if __name__ == "__main__":
-    # Reset bazy danych (czysty start)
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
